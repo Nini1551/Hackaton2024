@@ -1,0 +1,12 @@
+#table {
+  border-radius: 3px;
+  border: black 3px solid;
+  border-collapse: collapse;
+}
+
+#table td,
+#table th {
+  border: 1px solid black;
+  padding: 3px;
+  text-align: center;
+}
