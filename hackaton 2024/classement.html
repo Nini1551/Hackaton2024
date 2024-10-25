@@ -2,34 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <title>classement Baby foot OpenLab</title>
+    <title>Classement Baby Foot OpenLab</title>
     <link href="css/classement.css" type="text/css" rel="stylesheet" />
+    <script src="js/classement.js"></script>
   </head>
-  <body>
+  <body onload="onload()">
     <header>
-      <a href="connection baby foot.html">Connection</a>
+      <a href="connection baby foot.html" id="connection-link">Connection</a>
     </header>
-    <h1 id="h1">classement</h1>
-    <table id="table">
+    <h1 id="title">Classement</h1>
+    <table id="score-table">
       <thead>
-        <th>joueur1</th>
-        <th>joueur2</th>
-        <th>score</th>
-        <th>temps</th>
-      </thead>
-      <tbody id="tbody">
         <tr>
-          <td>Delvigne</td>
-          <td>Noel</td>
-          <td>10-8</td>
-          <td>6 min</td>
+          <th class="header-cell">Joueur 1</th>
+          <th class="header-cell">Joueur 2</th>
+          <th class="header-cell">Score</th>
+          <th class="header-cell">Temps</th>
         </tr>
-        <tr>
-          <td>Delvigne</td>
-          <td>Noel</td>
-          <td>5-10</td>
-          <td>3 min</td>
+      </thead>
+      <tbody id="score-body">
+        <tr class="score-row">
+          <td class="player-cell">Delvigne</td>
+          <td class="player-cell">Noel</td>
+          <td class="score-cell">10-8</td>
+          <td class="time-cell">6 min</td>
+        </tr>
+        <tr class="score-row">
+          <td class="player-cell">Delvigne</td>
+          <td class="player-cell">Noel</td>
+          <td class="score-cell">5-10</td>
+          <td class="time-cell">3 min</td>
         </tr>
       </tbody>
     </table>
