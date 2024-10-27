@@ -18,7 +18,6 @@ const Match = sequelize.define('Match', {
   },
   typeId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
     references: {
       model: TypeMatch,
       key: 'id',
