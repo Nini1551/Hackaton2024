@@ -1,40 +1,31 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('./index');
+const { DataTypes } = require("sequelize");
+const sequelize = require("./index");
+const TypeMatch = require("./typesMatch");
 
 const Match = sequelize.define('Match', {
   id: {
     type: DataTypes.INTEGER,
+    primaryKey: true,
     autoIncrement: true,
-    primaryKey: true
   },
-  beganAt: {
+  startedAt: {
     type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
+    defaultValue: DataTypes.NOW,
   },
   endedAt: {
     type: DataTypes.DATE,
-    allowNull: true
+    allowNull: true,
   },
-  typeMatchId: {
+  typeId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'typesMatch',
-      key: 'id'
-    }
-  }
-}, {
-  tableName: 'matchs',
-  timestamps: false,
-  validate: {
-    endedAfterBegan() {
-      if (this.endedAt !== null && this.endedAt <= this.beganAt) {
-        throw new Error('endedAt doit être postérieur à beganAt.');
-      }
-    }
-  }
+      model: TypeMatch,
+      key: 'id',
+    },
+  },
 });
 
-Match.sync();
+Match.sync({ alter: true });
 
 module.exports = Match;

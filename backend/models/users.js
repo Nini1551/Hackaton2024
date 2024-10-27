@@ -1,33 +1,37 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('./index');
+const { DataTypes } = require("sequelize");
+const sequelize = require("./index");
 
 const User = sequelize.define('User', {
   id: {
     type: DataTypes.INTEGER,
+    primaryKey: true,
     autoIncrement: true,
-    primaryKey: true
   },
   email: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING,
     allowNull: false,
     unique: true,
-    validate: {
-      isEmail: true
+    valide: {
+      isEmail: true,
     }
   },
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   password: {
-    type: DataTypes.STRING(255),
-    allowNull: false
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   createdAt: {
     type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
-  }
+    defaultValue: DataTypes.NOW,
+  },
 }, {
   tableName: 'users',
-  timestamps: false // Si vous n'avez pas de colonnes `updated_at`, sinon mettre `true`
+  timestamps: false,
 });
 
-User.sync();
+User.sync({ alter: true });
 
 module.exports = User;

@@ -1,9 +1,29 @@
+const Match = require("../models/matchs");
 const TypeMatch = require("../models/typesMatch");
 
 const getMatchs = async (req, res) => {
   try {
-    const users = await Match.findAll();
-    res.json(users);
+    const matchs = await Match.findAll();
+    res.json(matchs);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+const getMatchById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const match = await Match.findByPk(id);
+    res.json(match);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+ 
+const createMatch = async (req, res) => {
+  try {
+    const match = await Match.create(req.body);
+    res.json(match);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -11,42 +31,52 @@ const getMatchs = async (req, res) => {
 
 const getTypesMatch = async (req, res) => {
   try {
-    const users = await TypeMatch.findAll();
-    res.json(users);
+    const types = await TypeMatch.findAll();
+    res.json(types);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 }
 
-const getScoresMatch = async (req, res) => {
+const getTypeMatchById = async (req, res) => {
   try {
-    const scores = await UserMatch.findAll({
-      where: {
-        matchId: req.params.id
-      }
-    });
-    res.json(scores);
+    const { id } = req.params;
+    const type = await TypeMatch.findByPk(id);
+    res.json(type);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 }
 
-const getUsersMatch = async (req, res) => {
+const getMatchsByType = async (req, res) => {
   try {
-    const users = await UserMatch.findAll({
+    const { id } = req.params;
+    const matchs = await Match.findAll({
       where: {
-        userId: req.params.id
-      }
+        typeMatchId: id,
+      },
     });
-    res.json(users);
+    res.json(matchs);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+const createTypeMatch = async (req, res) => {
+  try {
+    const type = await TypeMatch.create(req.body);
+    res.json(type);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 }
 
 module.exports = {
-  getTypesMatch,
   getMatchs,
-  getScoresMatch,
-  getUsersMatch
+  getMatchById,
+  createMatch,
+  getTypesMatch,
+  getTypeMatchById,
+  getMatchsByType,
+  createTypeMatch
 };

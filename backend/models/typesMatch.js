@@ -4,51 +4,31 @@ const sequelize = require("./index");
 const TypeMatch = sequelize.define('TypeMatch', {
   id: {
     type: DataTypes.INTEGER,
+    primaryKey: true,
     autoIncrement: true,
-    primaryKey: true
   },
-  type: {
-    type: DataTypes.STRING(255),
+  type : {
+    type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   },
-  maxDuration: { // In seconds
+  maxPoints : {
     type: DataTypes.INTEGER,
-    allowNull: true
+    allowNull: true,
   },
-  maxPoints: {
+  maxDuration : {
     type: DataTypes.INTEGER,
-    allowNull: true
+    allowNull: true,
   },
-  createdAt: {
+  createdAt : {
     type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
-  }
+    defaultValue: DataTypes.NOW,
+  },
 }, {
   tableName: 'typesMatch',
   timestamps: false,
-  validate: {
-    notBothNull() {
-      if (this.dureeMax === null && this.pointsMax === null) {
-        throw new Error('maxPoints and maxDuration cannot be both null');
-      }
-    },
-    async uniqueDureePoints() {
-      if (this.dureeMax !== null || this.pointsMax !== null) {
-        const match = await TypeMatch.findOne({
-          where: {
-            dureeMax: this.dureeMax,
-            pointsMax: this.pointsMax,
-          },
-        });
-        if (match) {
-          throw new Error('There is already a match with the same duration and points');
-        }
-      }
-    }
-  }
 });
 
-TypeMatch.sync();
+TypeMatch.sync({ alter: true });
 
 module.exports = TypeMatch;
