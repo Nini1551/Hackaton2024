@@ -4,7 +4,7 @@ MatchsController = require('../controllers/matchs.controller');
 const router = express.Router();
 
 router.get('/', MatchsController.getMatchs);
-router.get('/:id', MatchsController.getMatchById);
+router.get('match/:id', MatchsController.getMatchById);
 router.get('/types/:id', MatchsController.getMatchsByType);
 router.post('/', MatchsController.createMatch);
 
